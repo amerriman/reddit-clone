@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>World</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+
+    <div ng-controller="reddit">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Reddit Clone <span class="sr-only">(current)</span></a></li>
+
+                        <li ng-click="show = !show"><a><span class = 'glyphicon glyphicon-plus'></span> Submit Post </a></li>
+                        <li>
+                          <!--   <select class="dropdown" ng-model="selectedOrder" ng-options="option for option in options">
+                            </select> -->
+                            <select ng-model="sort" class="form-control">
+                                <option value="-votes">Votes</option>
+                                <option value="date">Date</option>
+                                <option value="title">Title</option>
+                            </select>
+
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" ng-model="searchText"class="form-control" placeholder="Search">
+                            </div>
+
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+    <!-- create new posts form -->
+
+        <form name="newPost" ng-model="newPost" ng-show='show'>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="text" placeholder="Title" ng-model="title" required>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" class="form-control" id="author" placeholder="Author" ng-model="author"required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image URL</label>
+                <input type="text" class="form-control" id="image" placeholder="Image URL" ng-model="image">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" placeholder="Description" ng-model="description" required>
+            </div>
+
+            <button type="submit" class="btn btn-success" ng-click="addPost(); ; show=false" ng-disabled="newPost.$invalid" type="submit" class="btn btn-default">Submit Post</button>
+        </form>
+    <!-- </div> -->
+
+        <br>
+        <br>
+
+
+
+    <!-- end form -->
+<!-- ng-repeat="post in posts" -->
+    <!-- show content -->
+    <div class="content-wrapper item" ngAnimate ng-repeat="post in posts | filter: searchText | orderBy: sort">
+        <div class="row main-row" >
+            <div class="col-md-2">
+                <img src= "{{post.image}}" alt='picture' height="120px" width="150">
+            </div>
+
+            <div class="col-md-8 content">
+                    <h4>{{post.title}} | <span ng-click='post.votes = post.votes + 1' class = "glyphicon glyphicon-arrow-up"></span>  <span ng-click='post.votes = post.votes - 1' class = "glyphicon glyphicon-arrow-down"></span> <span ng-class="{'red':post.votes < 0, 'green':post.votes > 0}"> {{post.votes}} </span></h4>
+                    <h5>{{post.author}}</h5>
+                    <p>{{post.description}}</p>
+                <h6><span class= "glyphicon glyphicon-calendar"></span><span>&nbsp;{{post.date | amCalendar }} </span> &nbsp;|&nbsp; <span ng-click="comments = !comments; !commentForm">{{post.comments.length}} comments</span> <span>&nbsp;|&nbsp; <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;<span ng-click="commentForm = !commentForm; comments = !comments">Add Comment</span></h6>
+
+                <!-- comments -->
+                <div style="width:500px; height:75px; overflow: auto;" class="comment-section" ng-show="comments">
+                    <p class="item" ngAnimate ng-repeat="comment in post.comments">{{comment.name}}: &nbsp;{{comment.comment}}</p>
+                </div>
+
+                <!-- comments form -->
+                <form ng-model="newComment" class="form-inline repeat-animation hide-fade" ng-show="commentForm" name="form">
+                    <div class="form-group">
+                        <label for="nameText">Name</label>
+                        <input name="commentName" ng-model="commentName" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="commentBody">Comment</label>
+                        <input name="commentBody" ng-model="commentBody" type="text" class="form-control">
+                    </div>
+                    <button ng-click="addComment(commentName,commentBody, post.title); commentForm = ! commentForm; ! comments"type="submit" class="btn btn-default">Submit Comment</button>
+                </form>
+            </div>
+        </div>
+        <br>
+    </div>
+        <!-- end content -->
+
+
+    </div>
+    <br>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script type="text/javascript" src='js/animate.js'></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+        <script src="./js/app.js" type="text/javascript"></script>
+    <script src="./js/controllers.js" type="text/javascript"></script>
+    <script src="./js/directives.js" type="text/javascript"></script>
+    <script src="./js/filters.js" type="text/javascript"></script>
+    <script src="./js/services.js" type="text/javascript"></script>
+  </body>
+</html>

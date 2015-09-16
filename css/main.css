@@ -1,0 +1,104 @@
+/* add custom styles */
+.highlight {
+  background-color: yellow;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.sale {
+  color: orange;
+}
+
+.box {
+  background-color: #1E90FF;
+  height: 300px;
+  width: 300px;
+}
+
+.player{
+  padding-top: 10px;
+  font-size: 28px;
+  color: white;
+  text-align: center;
+}
+
+.score{
+  text-align: center;
+  font-size: 120px;
+  color: white;
+}
+
+.serve {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+
+.lose {
+  background-color: red;
+}
+
+.win{
+  background-color: green;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.reset {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.renew {
+  background-color: #1E90FF;
+}
+
+.main-row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #F0F0F0;
+  border-radius: 5px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.item { }
+
+.item.ng-move,
+.item.ng-enter,
+.item.ng-leave {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.item.ng-leave.ng-leave-active,
+.item.ng-move,
+.item.ng-enter {
+  opacity:0;
+}
+
+.item.ng-leave,
+.item.ng-move.ng-move-active,
+.item.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+
